@@ -1,0 +1,7 @@
+Pillow
+librosa
+numpy
+matplotlib
+tensorflow
+boto3
+Flask
