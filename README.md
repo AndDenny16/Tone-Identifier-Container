@@ -1,12 +1,47 @@
 # **Tone Buddy**  
 ## **Step 2: Dockerized ML Model**
 
+## **Motivation**
+As a Computer Science major with a minor in Chinese Studies, I wanted to combine these two fields into a meaningful project. Mandarin Chinese, a tonal language, has **4 tones**, and the meaning of each word depends on using the correct tone.
+
+For example:  
+- **媽 (mā)**: 1st tone = *mother*  
+- **罵 (mà)**: 4th tone = *scold*  
+
+Messing up a tone can completely change the meaning of a sentence. This is a common challenge for learners of Mandarin. To address this, I created **Tone Buddy**, an app designed to help learners practice their tones using machine learning (ML).
+
 ---
 
-## **Overview**
-This step involves containerizing the Tone Buddy ML model to make it portable, scalable, and easy to deploy. The ML model predicts Mandarin tones by processing spectrograms of audio input. Docker ensures that the model and its dependencies are packaged together for consistent performance across environments.
+## **Project Breakdown**
+This repository is **Step 2** of the overall project: containerizing the ML model for the app. Below is an overview of the full project workflow:
+
+### **Step 1: Tone Classification Model**
+- Trained a **Deep Convolutional Neural Network (CNN)** on spectrograms of native Mandarin speakers using:
+  - **TensorFlow**
+  - **Librosa** (for audio preprocessing)
+  - **Python**
+- The model predicts the tone of a given word based on its audio spectrogram.
+
+### **Step 2: Dockerized ML Model (This Repository)**
+- Deployed the pretrained ML model in a custom **Docker container**.
+- The container performs the following:
+  1. Accepts user audio input.
+  2. Converts the audio into a spectrogram.
+  3. Feeds the spectrogram into the ML model.
+  4. Returns the predicted tone.
+
+### **Step 3: Serverless Backend**
+- Built a scalable backend using:
+  - **AWS API Gateway** and **AWS Lambda** for serverless functions.
+  - **Amazon S3** for storing user data and spectrogram files.
+  - **AWS Fargate** for hosting the Docker container.
+
+### **Step 4: Frontend**
+- Developed a **React Native frontend** to provide an intuitive and engaging user experience for learners.
 
 ---
+
+## **About This Repository**
 
 ## **Features**
 - **ML Model Deployment:** A pretrained Convolutional Neural Network (CNN) for Mandarin tone classification.
