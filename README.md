@@ -39,9 +39,9 @@ This step involves containerizing the Tone Buddy ML model to make it portable, s
 - requirements.txt - list of dependencies
 
 
-##**To Run the Container**
+## **To Run the Container**
 
-- To Run on your locally
+- To Runlocally
 
 `` docker build -t <your_desired_name> ``
 
