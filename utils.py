@@ -1,6 +1,6 @@
 
 import boto3
-from PIL import Image
+from PIL import Image, ImageFilter
 import io 
 import matplotlib.pyplot as plt
 import matplotlib
@@ -38,10 +38,12 @@ def create_image(audio_data, img_size):
     audio_file = io.BytesIO(audio_data)
     audio, sr = librosa.load(audio_file, sr=16000)
     print("Librosa load complete")
+
     trimmed_audio, _ = librosa.effects.trim(audio, top_db=10)
     mel_spectrogram = librosa.feature.melspectrogram(y=trimmed_audio, sr=sr, n_fft=2048, hop_length=16, n_mels=64, fmin=50, fmax=350)
     mel_spectrogram_db = librosa.power_to_db(mel_spectrogram, ref=np.max)
     print("Librosa Spectrogram Complete")
+
     fig = plt.figure(figsize=(2.5, 2.5)) 
     plt.axis('off')  
     librosa.display.specshow(mel_spectrogram_db, sr=sr, hop_length=16, x_axis=None, y_axis=None)
@@ -51,7 +53,10 @@ def create_image(audio_data, img_size):
     img_array = np.frombuffer(fig.canvas.buffer_rgba(), dtype=np.uint8)
     img_array = img_array.reshape((h,w,4)) 
     image = Image.fromarray(img_array).resize(img_size).convert('RGB')
+    image = image.filter(ImageFilter.GaussianBlur(radius=1))
     print("Image Spectrogram Complete")
-    img_array = np.array(image).astype(np.float32) 
+
+    img_array = np.array(image).astype(np.float32)/255.0
+    print(img_array)
     plt.close(fig)
     return image, img_array
