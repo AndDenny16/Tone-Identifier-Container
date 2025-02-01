@@ -60,27 +60,26 @@ This repository is **Step 2** of the overall project: containerizing the ML mode
 ---
 
 ## **Project Components**
-### **1. ML Model**
+### **1. ML Model** (Not Included > 2GB)
 - **Framework:** TensorFlow (.keras) file
 - **Input Format:** Spectrograms (1, 225, 225, 3)
-- **Output:** Predicted tone (1st, 2nd, 3rd, or 4th)
-
+- **Output:** Predicted tone (1st, 2nd, 3rd, or 4th) with probability
 
 ### **2. DockerFile** 
 - **Base Image** Python 3.11
+- **Install** Requirements.txt
+- **Start** Gunicorn Server
 
 
 ### **3. Requirements** 
 - requirements.txt - list of dependencies
-
-
-## **To Run the Container**
-
-- To Runlocally
-
-`` docker build -t <your_desired_name> ``
-
-`` docker run -it -p <desired_port>:5000 <your_desired_name> ``
+- `` Pillow
+librosa
+numpy
+matplotlib
+tensorflow
+boto3
+Flask ``
   
 
 
