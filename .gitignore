@@ -1,2 +1,3 @@
 *.keras
 *.env
+*.DS_Store
