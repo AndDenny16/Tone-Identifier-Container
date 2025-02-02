@@ -51,7 +51,7 @@ This repository is **Step 2** of the overall project: containerizing the ML mode
 - **ML Model Deployment:** A pretrained Convolutional Neural Network (CNN) for Mandarin tone classification.
 - **Audio Processing Pipeline:** Converts user audio into spectrograms before feeding them to the model.
 - **Dockerized Solution:** Simplifies deployment and ensures consistent runtime environments.
-- **RESTful API Integration:** Accepts audio input, processes it, and returns tone predictions.
+- **Flask API:** Accepts audio input, processes it, and returns tone predictions.
 
 ---
 
