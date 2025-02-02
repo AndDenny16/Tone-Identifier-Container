@@ -41,16 +41,19 @@ def predict_tone():
             audio = data.get('audio')
             username = data.get('username')
             audio_data = base64.b64decode(audio)
+
             #Create Spectrogram Image for Input to Model
             image, image_array = create_image(audio_data, (225, 225))
+
             #Save Image to S3
             save_to_s3(image, username)
+
             #Create Tensor from Image
             image_tensor  = np.expand_dims(image_array, axis=0)
             #Model Prediction
             prediction = model.predict(image_tensor)
             
-            #POS Processing 
+            #Post Processing Processing 
             index = np.argmax(prediction)
             return_value = index + 1
             print('Prediction Made', return_value)
@@ -72,10 +75,13 @@ def predict_tone():
         
     else:
         return jsonify({
-            'body': "Wrong Method"
-        })
+                "error": {
+                    "message": "Wrong Method"
+                }
+            }), 450
     
 
+#Info Route
 @app.route('/info', methods = ['GET']) 
 def info():
     return jsonify({
