@@ -58,8 +58,9 @@ This repository is **Step 2** of the overall project: containerizing the ML mode
 ## **Workflow**
 1. **Input:** User submits an audio recording of a monosyllabic mandarin word
 2. **Preprocessing:** Audio is converted into a spectrogram using **Librosa**. Image is converted into (1, 225, 225, 3) format.
-3. **Model Prediction:** The spectrogram is fed into the pretrained ML model, which outputs the predicted tone.
-4. **Output:** The result is sent back as a response (e.g., "Tone 3").
+3. **Save to S3** Spectrogram Image is saved to S3 user
+4. **Model Prediction:** The spectrogram is fed into the pretrained ML model, which outputs the predicted tone.
+5. **Output:** The result is sent back as a response (e.g., "Tone 3").
 
 ---
 
@@ -75,7 +76,7 @@ This repository is **Step 2** of the overall project: containerizing the ML mode
 - **Start** Gunicorn Server
 
 
-### **3. Requirements** 
+### **3. requirements.txt** 
 - requirements.txt - list of dependencies
 - `` Pillow
 librosa
@@ -84,6 +85,37 @@ matplotlib
 tensorflow
 boto3
 Flask ``
+
+### **3. utils.py**
+
+- **Audio Processing** using Librosa to create a spectrogram with these settings:
+    ```
+      - (1,225, 225,3) tensor size
+  
+      - Sample Rate:16000
+  
+      - Audio Trimmed: top_db: 10
+  
+      - n_fft=2048, hop_length=16, n_mels=64, fmin=50, fmax=350
+
+    ```
+- **Saving to S3 Bucket for UserData***
+
+### **3. app.py**
+- **Basic Flask Server** to accept requests
+    ```
+    /predict - Get a tone/score for a given audio clip
+    /health - Health Check
+    /info - info on how to make a request
+
+    ```
+
+- **Post Processing** of ML Model output
+
+
+### **To Test Locally** 
+- The repo currently doesn't house the ML Model dude to size restrictions, email me @ anddenny16@gmail.com, if you want to run it
+  
   
 
 
