@@ -40,7 +40,7 @@ This repository is **Step 2** of the overall project: containerizing the ML mode
   - **Amazon S3** for storing user data and spectrogram files.
   - **AWS Fargate** for hosting the Docker container.
 
-### **Step 4: Frontend**
+### **[Step 4: Frontend](https://github.com/AndDenny16/ToneBuddy)** 
 - Developed a **React Native frontend** to provide an intuitive and engaging user experience for learners.
 
 ---
