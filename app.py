@@ -94,7 +94,3 @@ def health():
     return jsonify({
         "message": "Server is Running"
     }), 200
-
-
-if __name__ == "__main__":
-    app.run('0.0.0.0', port=PORT_NUMBER, debug=False)

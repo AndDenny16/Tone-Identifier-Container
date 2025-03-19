@@ -1,16 +1,18 @@
-FROM python:3.11
-
-
-WORKDIR /app
+FROM python:3.11 AS builder
 
 COPY requirements.txt . 
-RUN pip install --no-cache-dir -r requirements.txt
 
-RUN pip install gunicorn
+RUN --mount=type=cache,target=/root/.cache/pip \
+    pip install --user -r requirements.txt
+
+FROM python:3.11-slim
+
+COPY --from=builder /root/.local /root/.local
 
 COPY . .
 
-EXPOSE 5000
+ENV PATH=/root/.local/bin:$PATH
 
-# Define the command to run your app
-CMD ["gunicorn", "-w", "1", "-b", "0.0.0.0:5000", "app:app"]
+EXPOSE 6000
+
+CMD ["gunicorn", "-w", "1", "-b", "0.0.0.0:6000", "app:app"]
